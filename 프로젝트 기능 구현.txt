@@ -1,0 +1,4 @@
+1. sns로그인 API
+2. 다국어 처리
+3. 웹소켓
+4. Mybatis와 JPA

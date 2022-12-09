@@ -1,0 +1,48 @@
+<스프링 설정 단계>
+1. Spring Legacy Project 생성 후
+    properties 수정 : Java Build Path, Compiler, Project Facet
+
+2. "pom.xml" - 프로젝트에서 빌드에 필요한 프로그램을 maven관리하기 위한 설정
+    (1) Java Version 수정
+    (2) SpringFramework 버전 수정
+    (3) AspectJ 버전 수정
+    (4) Maven에서 build할 때 사용하는 Java 버전 수정: source, target
+    (5) 필요한 의존성 라이브러리 추가 
+          - AspectJWeaver
+          - Oracle JDBC Driver
+          - Spring JDBC
+          - DBCP (commons-dbcp)
+          - 파일 업로드 (commons-fileupload)
+          - mybatis, mybatis-spring
+          - XML, JSON 데이터 필요시:
+            jackson-databind, jackson-dataformat-xml
+          - lombok
+
+3. 웹 프로그램 실행 관련 설정 
+(1) 비즈니스 로직 설정 파일: /src/main/resources/applicationContext.xml
+      - context:component-scan : base package 등록
+      - mvc:annotation-driven
+      - 데이터베이스 데이터소스 설정: jdbc driver, url, username, password
+      - database.properties 파일 작성(src/main/resources/config 에 위치)
+      - SqlSessionFactoryBean
+      - SqlSessionTemplate
+(2) Fronend관련 설정 파일: /src/main/webapp/WEB-INF/config/presentation-layer.xml
+      - context:component-scan :controller 등록 base package
+      - mvc:annotation-driven
+      - ViewResolver
+      - CommonsMultipartResolver
+      - 리소스 위치 설정: css, javascript, image 파일 위치, jsp 소스의 위치
+(3) web.xml 설정 
+      - applicationContext.xml, presentation-layer.xml 위치 설정
+      - Character Encoding Filter 등록(UTF-8)
+
+4. Mybatis 관련 설정
+(1) SQL 매핑 파일 작성: /src/main/resources/mappins/ooo-mapping.xml
+(2) Mybatis 설정 파일 작성: /src/main/resources/sql-map-config.xml
+      - 클래스의 별칭(Type alias 정의)
+      - 매핑 파일의 위치 등록
+
+
+
+
+
