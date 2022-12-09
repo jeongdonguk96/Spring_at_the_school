@@ -1,12 +1,12 @@
--- »ç¿ëÀÚ Å×ÀÌºí
+-- ì‚¬ìš©ì í…Œì´ë¸”
 CREATE TABLE userTable(
-  seq NUMBER(5) PRIMARY KEY, /* ÀÏ·Ã¹øÈ£ */
-  id VARCHAR2(10) UNIQUE, /* ¾ÆÀÌµğ */ 
-  pwd VARCHAR2(15), /* ºñ¹Ğ¹øÈ£ */
-  name VARCHAR2(10), /* ÀÌ¸§ */
-  jumin VARCHAR2(14), /* ÁÖ¹Î¹øÈ£ */
-  regDate DATE DEFAULT SYSDATE, /* °¡ÀÔÀÏ */
-  admin VARCHAR(1) DEFAULT 'N' /* °ü¸®ÀÚ¿©ºÎ */
+  seq NUMBER(5) PRIMARY KEY, /* ì¼ë ¨ë²ˆí˜¸ */
+  id VARCHAR2(10) UNIQUE, /* ì•„ì´ë”” */ 
+  pwd VARCHAR2(15), /* ë¹„ë°€ë²ˆí˜¸ */
+  name VARCHAR2(10), /* ì´ë¦„ */
+  jumin VARCHAR2(14), /* ì£¼ë¯¼ë²ˆí˜¸ */
+  regDate DATE DEFAULT SYSDATE, /* ê°€ì…ì¼ */
+  admin VARCHAR(1) DEFAULT 'N' /* ê´€ë¦¬ìì—¬ë¶€ */
 );
 
 CREATE SEQUENCE userTable_seq
@@ -16,20 +16,20 @@ INCREMENT BY 1;
 SELECT * FROM userTable ORDER BY seq desc;
 DROP TABLE userTable;
 
--- ¸ŞÀÎÈ­¸é Å×ÀÌºí
+-- ë©”ì¸í™”ë©´ í…Œì´ë¸”
 CREATE TABLE mainBoardTable(
-  seq NUMBER(5), /* ÀÏ·Ã¹øÈ£ */
-  entranceTime TIMESTAMP DEFAULT SYSDATE, /* ÀÔ½Ç½Ã°£ */
-  outingTime TIMESTAMP DEFAULT SYSDATE, /* ¿ÜÃâ½Ã°£ */
-  comebackTime TIMESTAMP DEFAULT SYSDATE, /* º¹±Í½Ã°£ */
-  leaveTime TIMESTAMP DEFAULT SYSDATE, /* Åğ½Ç½Ã°£ */
-  attendance VARCHAR2(3),  /* Ãâ¼® */
-  tardy VARCHAR2(3), /* Áö°¢ */
-  earlyLeave VARCHAR2(3),/* Á¶Åğ */
-  outing VARCHAR2(3), /* ¿ÜÃâ */
-  absence  VARCHAR2(3), /* °á¼® */
-  attendanceRate VARCHAR2(5), /* Ãâ¼®·ü */
-  progressRate VARCHAR2(5), /* ÁøÇà·ü */
+  seq NUMBER(5), /* foreignkey ì§€ì •, userì˜ ì¼ë ¨ë²ˆí˜¸ */
+  entranceTime TIMESTAMP DEFAULT SYSDATE, /* ì…ì‹¤ì‹œê°„ */
+  outingTime TIMESTAMP DEFAULT SYSDATE, /* ì™¸ì¶œì‹œê°„ */
+  comebackTime TIMESTAMP DEFAULT SYSDATE, /* ë³µê·€ì‹œê°„ */
+  leaveTime TIMESTAMP DEFAULT SYSDATE, /* í‡´ì‹¤ì‹œê°„ */
+  attendance VARCHAR2(3),  /* ì¶œì„ */
+  tardy VARCHAR2(3), /* ì§€ê° */
+  earlyLeave VARCHAR2(3),/* ì¡°í‡´ */
+  outing VARCHAR2(3), /* ì™¸ì¶œ */
+  absence  VARCHAR2(3), /* ê²°ì„ */
+  attendanceRate VARCHAR2(5), /* ì¶œì„ë¥  */
+  progressRate VARCHAR2(5), /* ì§„í–‰ë¥  */
   CONSTRAINT userSeq_FK FOREIGN KEY(seq) REFERENCES userTable(seq)
 );
 
