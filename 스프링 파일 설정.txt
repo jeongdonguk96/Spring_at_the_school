@@ -190,3 +190,48 @@
 	</property>
 	<property name="defaultErrorView" value="common/error.jsp"></property>
   </bean>
+  
+7. web.xml
+
+  <!-- 백엔드 측 설정 부분 : The definition of the Root Spring Container shared by all Servlets and Filters -->
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+	
+  <!-- Creates the Spring Container shared by all Servlets and Filters -->
+  <listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+	
+  <!-- 사용자측에서 받는 요청 / 프론트엔드 부분 : Processes application requests -->
+  <servlet>
+	<servlet-name>action</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>			
+		<param-value>/WEB-INF/config/presentation-layer.xml</param-value>
+		</init-param>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+		
+  <servlet-mapping>
+	<servlet-name>action</servlet-name>
+	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+	
+  <!-- 브라우저에서 URL 요청 시, 서블릿으로부터 가로채 인코딩 처리 -->
+  <filter>
+	<filter-name>characterEncoding</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+ 	</init-param>
+  </filter>
+
+  <filter-mapping>
+	<filter-name>characterEncoding</filter-name>
+	<url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  
