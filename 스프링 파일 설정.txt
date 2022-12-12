@@ -1,0 +1,192 @@
+스프링 파일 설정
+
+1. pom.xml
+  Maven의 빌드 정보를 담고 있는 파일로, Project Object Model의 줄임말.
+  디펜던시들을 저장하는 곳으로,
+  디펜던시는 프로젝트가 의존하는 라이브러리의 정보다.
+  주로 <dependency><groupId><artifactId><version>의 순서다
+  
+  (1) AspectJ
+  <!-- AspectJ, AspectJweaver-->
+  <dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjrt</artifactId>
+	<version>${org.aspectj-version}</version>
+  </dependency>
+  <dependency>
+	<groupId>org.aspectj</groupId>
+	<artifactId>aspectjweaver</artifactId>
+	<version>${org.aspectj-version}</version>
+  </dependency>	
+
+  (2) JDBC
+  <!-- JDBC -->						
+  <dependency>
+	<groupId>com.oracle.database.jdbc</groupId>
+   	<artifactId>ojdbc8</artifactId>
+	<version>21.7.0.0</version>
+  </dependency>
+  <!-- Spring JDBC -->
+  <dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-jdbc</artifactId>
+	<version>${org.springframework-version}</version>
+  </dependency>
+  <!-- Commons DBCP -->
+  <dependency>
+	<groupId>commons-dbcp</groupId>
+	<artifactId>commons-dbcp</artifactId>
+	<version>1.4</version>
+  </dependency>
+
+  (3) fileUpload
+  <!-- 파일 업르도 commons-fileupload -->
+  <dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.4</version>
+  </dependency>
+
+  (4) MyBatis
+  <!-- MyBatis -->
+  <dependency>
+	<groupId>org.mybatis</groupId>
+	<artifactId>mybatis</artifactId>
+	<version>3.5.11</version>
+  </dependency>
+  <!-- MyBatis Spring -->
+  <dependency>
+	<groupId>org.mybatis</groupId>
+	<artifactId>mybatis-spring</artifactId>
+	<version>3.0.0</version>
+  </dependency>
+
+  (5) Json
+  <!-- JSON databind : JSON 변환 시 필요 -->
+  <dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>2.14.1</version>
+  </dependency>
+  <!-- JSON dataformat : xml 변환 시 필요-->
+  <dependency>
+	<groupId>com.fasterxml.jackson.dataformat</groupId>
+	<artifactId>jackson-dataformat-xml</artifactId>
+	<version>2.14.1</version>
+  </dependency>
+  <dependency>
+	<groupId>jakarta.xml.bind</groupId>
+	<artifactId>jakarta.xml.bind-api</artifactId>
+	<version>4.0.0</version>
+  </dependency>
+
+  (6) JSTL
+  <!-- jstl standard taglibs -->
+  <dependency>
+	<groupId>org.apache.taglibs</groupId>
+	<artifactId>taglibs-standard-impl</artifactId>
+	<version>1.2.5</version>
+	<scope>runtime</scope>
+  </dependency>	
+
+2. config/database.properties
+  DB프로그램에 대한 정보가 담긴 곳
+  어떤 프로그램인지와 그 프로그램의 id와 pwd를 적는 곳
+
+  jdbc.driver=oracle.jdbc.driver.OracleDriver
+  jdbc.url=jdbc:oracle:thin:@localhost:1521:XE
+  jdbc.username=spring_user
+  jdbc.password=ora123
+  
+3. mappings/?-mapping.xml
+  실행할 SQL문을 정의해놓은 파일
+  실행을 위한 파라미터를 받아오거나, 실행결과를 자동바인딩하는 기능을 제공
+  sql-map-config.xml 파일에 등록을 해야 사용이 가능하다.
+
+  <mapper namespace="userMapper">
+  	<select id="getUser" resultType="user">
+		SELECT * FROM users WHERE id=#{id} AND pwd=#{pwd}
+	</select>
+  </mapper>
+
+4. sql-map-config.xml
+  SQL Maps이라고도 한다.
+  DB연결을 위한 데이터소스, 데이터매퍼에 대한 설정 등을 지정한다.
+  
+  <configuration>
+	<!-- sql mapper에서 사용할 클래스들의 별칭 선언 -->
+	<typeAliases>
+		<typeAlias type="com.ezen.biz.dto.BoardVO" alias="board"/>
+		<typeAlias type="com.ezen.biz.dto.UserVO" alias="user"/>
+	</typeAliases>
+	
+	<!-- sql 명령어들이 저장된 sql 파일 등록 (여러 파일 등록 가능) -->
+	<mappers>
+		<mapper resource="mappings/board-mapping.xml"/>
+		<mapper resource="mappings/user-mapping.xml"/>
+	</mappers>
+		
+  </configuration>
+
+5. applicationContext.xml
+
+  <!-- applicationContext.xml은 비즈니스 계층	-->
+	
+  <!-- @Component이하의 어노테이션을 읽는 설정 : Namespaces에서 context 체크 -->
+  <context:component-scan base-package="com.ezen.biz"></context:component-scan>
+
+  <!-- DataSource 설정, 특정 DBMS로의 연결을 획득, DB연동을 처리하기 위해 필요 -->
+  <context:property-placeholder location="classpath:config/database.properties"/>
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="${jdbc.driver}"/>
+	<property name="url" value="${jdbc.url}"/>
+	<property name="username" value="${jdbc.username}"/>
+	<property name="password" value="${jdbc.password}"/>
+  </bean>
+
+  <!-- SqlSessionFactoryBean 등록, mapper와 config안의 쿼리문 수행 -->
+  <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="configLocation" value="classpath:sql-map-config.xml"></property>
+  </bean>
+	
+  <!-- SqlSessionTemplate 등록. 위의 SqlSessionFactoryBean을 수행해주는 객체 생성, 위의 SqlSessionFactoryBean을 참조해야 하는데 Setter가 없어서 생성자 주입 방식으로 DI -->
+  <bean class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sessionFactory"></constructor-arg>
+  </bean>
+
+6. presentation-layer.xml
+
+  <!-- presentation-layer.xml은 프론트 계층 -->
+	
+  <!-- @Component이하의 어노테이션을 읽는 설정 : Namespaces에서 context 체크 -->
+  <context:component-scan base-package="com.ezen.view"></context:component-scan>
+	
+  <!-- @ExceptionHandler 어노테이션을 사용할 수 있는 설정 -->
+  <!-- JSON, HttpMessageConverter를 구현한 모든 변환기 생성 -->
+<mvc:annotation-driven></mvc:annotation-driven>
+	
+  <!-- 파일 업로드 설정 -->
+  <!-- id는 고정이므로 다른 이름 사용 X, uploadsize의 value -1은 무제한을 의미 -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="-1"/>	
+  </bean>
+		
+  <!-- 예외 처리 등록 : Namespaces에서 mvc 체크 -->
+  <!-- id는 고정이므로 다른 이름 사용 X, 따로 예외클래스를 만들지 않고 xml에 설정하는 방법 -->
+  <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<property name="exceptionMappings">
+		<props>
+			<prop key="java.lang.ArithmeticException">
+				common/arithmeticError.jsp
+			</prop>
+			<prop key="java.lang.IllegalArgumentException">
+				common/argumentError.jsp
+			</prop>
+			<prop key="java.lang.NullPointerException">
+				common/nullPointerError.jsp
+			</prop>
+		</props>
+	</property>
+	<property name="defaultErrorView" value="common/error.jsp"></property>
+  </bean>
