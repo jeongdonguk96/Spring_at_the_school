@@ -142,6 +142,13 @@
 	
   <!-- @Component이하의 어노테이션을 읽는 설정 : Namespaces에서 context 체크 -->
   <context:component-scan base-package="com.ezen.biz"></context:component-scan>
+  
+  <!-- @ExceptionHandler 어노테이션을 사용할 수 있는 설정 -->
+  <!-- JSON, HttpMessageConverter를 구현한 모든 변환기 생성 -->
+  <mvc:annotation-driven></mvc:annotation-driven>
+  
+  <!-- AOP 어노테이션 설정 -->
+  <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
   <!-- DataSource 설정, 특정 DBMS로의 연결을 획득, DB연동을 처리하기 위해 필요 -->
   <context:property-placeholder location="classpath:config/database.properties"/>
