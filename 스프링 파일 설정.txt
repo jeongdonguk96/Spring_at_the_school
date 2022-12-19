@@ -206,6 +206,13 @@
 	<property name="defaultErrorView" value="common/error.jsp"></property>
   </bean>
   
+  <!-- JSP View Resolver, id가 따로 없음, setter주입방식 사용 -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<property name="prefix" value="/WEN-INF/views/"></property>
+  	<property name="suffix" value=".jsp"></property>
+  	<property name="contentType" value="text/html; charset=UTF-8"></property>
+  </bean>  
+  
 7. web.xml
 
   <!-- 백엔드 측 설정 부분 : The definition of the Root Spring Container shared by all Servlets and Filters -->
