@@ -28,7 +28,7 @@ public class PageHandler {
 		this.pageSize = pageSize;
 		
 		totalPage = (int) Math.ceil(totalCount / (double)pageSize); // ex) 전체 페이지 수는 462/10 = 46에 ceil(올림)로 인해 47
-		beginPage = (page / naviSize) * naviSize + 1; // ex) 네비게이션의 첫 페이지는 (35/10)*10+1 = 31 
+		beginPage = (page-1) / naviSize * naviSize + 1; // ex) 네비게이션의 첫 페이지는 (35/10)*10+1 = 31 
 		endPage = Math.min(beginPage + naviSize - 1, totalPage); // ex) 네비게이션의 마지막 페이지는 (31+10-1, 47) 둘 중 작은 숫자
 		showPrev = beginPage != 1; // 이전페이지는 네비 첫 페이지가 1이 아닌 경우 보여주기
 		showNext = endPage != totalPage; // 다음페이지는 네비 마지막 페이지가 곧 전체 페이지가 아닌 경우 보여주기
