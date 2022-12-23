@@ -3,3 +3,4 @@
 3. 웹소켓
 4. Mybatis와 JPA
 5. QnA등은 WHERE id=#{id}를 걸어서 개인만 볼 수 있게
+6. 모든 이동은 js onclick으로
