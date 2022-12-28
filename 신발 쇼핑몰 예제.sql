@@ -1,36 +1,39 @@
 -- id: shoppingmall
 -- pwd: ora123
+--ì£¼ë¬¸ì·¨ì†Œ
+--qna ì‚­ì œ
+--ì„¸ì¼í’ˆëª©
 
--- È¸¿ø Å×ÀÌºí
+-- íšŒì› í…Œì´ë¸”
 CREATE TABLE member(
-  id VARCHAR2(20) PRIMARY KEY, /* ¾ÆÀÌµğ */ 
-  pwd VARCHAR2(20), /* ºñ¹Ğ¹øÈ£ */
-  name VARCHAR2(40), /* ÀÌ¸§ */
-  email VARCHAR2(40), /* ÀÌ¸ŞÀÏ */
-  zip_num VARCHAR2(7), /* ÁÖ¼Ò¹øÈ£ */
-  address VARCHAR2(100), /* ÁÖ¼Ò */
-  phone VARCHAR2(20), /* ÀüÈ­¹øÈ£ */
-  useyn CHAR(1) DEFAULT 'y', /* Å»Åğ¿©ºÎ */
-  regDate DATE DEFAULT SYSDATE /* °¡ÀÔÀÏ */
+  id VARCHAR2(20) PRIMARY KEY, /* ì•„ì´ë”” */ 
+  pwd VARCHAR2(20), /* ë¹„ë°€ë²ˆí˜¸ */
+  name VARCHAR2(40), /* ì´ë¦„ */
+  email VARCHAR2(40), /* ì´ë©”ì¼ */
+  zip_num VARCHAR2(7), /* ì£¼ì†Œë²ˆí˜¸ */
+  address VARCHAR2(100), /* ì£¼ì†Œ */
+  phone VARCHAR2(20), /* ì „í™”ë²ˆí˜¸ */
+  useyn CHAR(1) DEFAULT 'y', /* íƒˆí‡´ì—¬ë¶€ */
+  regDate DATE DEFAULT SYSDATE /* ê°€ì…ì¼ */
 );
 
 SELECT * FROM member ORDER BY regDate DESC;
 DROP TABLE member;
 commit;
 
--- »óÇ° Å×ÀÌºí
+-- ìƒí’ˆ í…Œì´ë¸”
 CREATE TABLE product(
-  pseq NUMBER(5) PRIMARY KEY, /* µî·Ï¹øÈ£ */
-  name VARCHAR2(100), /* »óÇ°¸í */
-  kind CHAR(1), /* Á¾·ù 1:Èú, 2:ºÎÃ÷, 3:»÷´Ş, 4:½½¸®ÆÛ, 5:½º´ÏÄ¿Áî */
-  price1 NUMBER(7) DEFAULT 0, /* ¿ø°¡ */
-  price2 NUMBER(7) DEFAULT 0, /* ÆÇ¸Å°¡ */
-  price3 NUMBER(7) DEFAULT 0, /* ÆÇ¸Å°¡ - ¿ø°¡ */
-  content VARCHAR2(1000) DEFAULT NULL, /* ³»¿ë */
-  image VARCHAR2(50) DEFAULT 'default.jpg', /* ÀÌ¹ÌÁö */
-  useyn CHAR(1) DEFAULT 'y', /* ½Å»óÇ° ¿©ºÎ y:½Å»óÇ° n:½Å»óÇ° ¾Æ´Ô*/ 
-  bestyn CHAR(1) DEFAULT 'n', /* º£½ºÆ®»óÇ° ¿©ºÎ y:º£½ºÆ®»óÇ° n:º£½ºÆ®»óÇ° ¾Æ´Ô */
-  regDate DATE DEFAULT SYSDATE /* µî·ÏÀÏ */
+  pseq NUMBER(5) PRIMARY KEY, /* ë“±ë¡ë²ˆí˜¸ */
+  name VARCHAR2(100), /* ìƒí’ˆëª… */
+  kind CHAR(1), /* ì¢…ë¥˜ 1:í, 2:ë¶€ì¸ , 3:ìƒŒë‹¬, 4:ìŠ¬ë¦¬í¼, 5:ìŠ¤ë‹ˆì»¤ì¦ˆ */
+  price1 NUMBER(7) DEFAULT 0, /* ì›ê°€ */
+  price2 NUMBER(7) DEFAULT 0, /* íŒë§¤ê°€ */
+  price3 NUMBER(7) DEFAULT 0, /* íŒë§¤ê°€ - ì›ê°€ */
+  content VARCHAR2(1000) DEFAULT NULL, /* ë‚´ìš© */
+  image VARCHAR2(50) DEFAULT 'default.jpg', /* ì´ë¯¸ì§€ */
+  useyn CHAR(1) DEFAULT 'y', /* ì‹ ìƒí’ˆ ì—¬ë¶€ y:ì‹ ìƒí’ˆ n:ì‹ ìƒí’ˆ ì•„ë‹˜*/ 
+  bestyn CHAR(1) DEFAULT 'n', /* ë² ìŠ¤íŠ¸ìƒí’ˆ ì—¬ë¶€ y:ë² ìŠ¤íŠ¸ìƒí’ˆ n:ë² ìŠ¤íŠ¸ìƒí’ˆ ì•„ë‹˜ */
+  regDate DATE DEFAULT SYSDATE /* ë“±ë¡ì¼ */
 );
 
 CREATE SEQUENCE product_seq
@@ -48,26 +51,26 @@ SELECT *
  WHERE rn <= 1*10
    AND rn > 0*10;
 
--- °ü¸®ÀÚ Å×ÀÌºí
+-- ê´€ë¦¬ì í…Œì´ë¸”
 CREATE TABLE admin(
-  id  VARCHAR2(20) PRIMARY KEY, /* ¾ÆÀÌµğ */
-  pwd VARCHAR2(20), /* ºñ¹Ğ¹øÈ£ */
-  name VARCHAR2(40), /* ÀÌ¸§ */
-  phone VARCHAR2(20) /* ÀüÈ­¹øÈ£ */
+  id  VARCHAR2(20) PRIMARY KEY, /* ì•„ì´ë”” */
+  pwd VARCHAR2(20), /* ë¹„ë°€ë²ˆí˜¸ */
+  name VARCHAR2(40), /* ì´ë¦„ */
+  phone VARCHAR2(20) /* ì „í™”ë²ˆí˜¸ */
 );
 
 SELECT * FROM admin;
 DROP TABLE admin;
 commit;
 
--- Àå¹Ù±¸´Ï Å×ÀÌºí
+-- ì¥ë°”êµ¬ë‹ˆ í…Œì´ë¸”
 CREATE TABLE cart(
-  cseq NUMBER(10) PRIMARY KEY, /* Àå¹Ù±¸´Ï¹øÈ£ */
-  id  VARCHAR2(20), /* È¸¿ø ¾ÆÀÌµğ */
-  pseq NUMBER(5), /* »óÇ°¹øÈ£ */
-  quantity NUMBER(5) DEFAULT 1, /* ¼ö·® */
-  result CHAR(1) DEFAULT '1', /* Ã³¸®¿©ºÎ 1:¹ÌÃ³¸®, 2:Ã³¸®*/
-  indate DATE DEFAULT SYSDATE, /* ÀúÀåÀÏ */
+  cseq NUMBER(10) PRIMARY KEY, /* ì¥ë°”êµ¬ë‹ˆë²ˆí˜¸ */
+  id  VARCHAR2(20), /* íšŒì› ì•„ì´ë”” */
+  pseq NUMBER(5), /* ìƒí’ˆë²ˆí˜¸ */
+  quantity NUMBER(5) DEFAULT 1, /* ìˆ˜ëŸ‰ */
+  result CHAR(1) DEFAULT '1', /* ì²˜ë¦¬ì—¬ë¶€ 1:ë¯¸ì²˜ë¦¬, 2:ì²˜ë¦¬*/
+  indate DATE DEFAULT SYSDATE, /* ì €ì¥ì¼ */
   FOREIGN KEY(id) REFERENCES member(id),
   FOREIGN KEY(pseq) REFERENCES product(pseq)
 );
@@ -80,11 +83,11 @@ SELECT * FROM cart ORDER BY indate DESC;
 DROP TABLE cart;
 commit;
 
--- ÁÖ¹® Å×ÀÌºí
+-- ì£¼ë¬¸ í…Œì´ë¸”
 CREATE TABLE orders(
-  oseq NUMBER(10) PRIMARY KEY, /* ÁÖ¹®¹øÈ£ */
-  id VARCHAR2(20), /* ÀÌ¸§ */
-  indate DATE DEFAULT SYSDATE, /* ÁÖ¹®ÀÏ */
+  oseq NUMBER(10) PRIMARY KEY, /* ì£¼ë¬¸ë²ˆí˜¸ */
+  id VARCHAR2(20), /* ì´ë¦„ */
+  indate DATE DEFAULT SYSDATE, /* ì£¼ë¬¸ì¼ */
   FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -96,13 +99,13 @@ SELECT * FROM orders ORDER BY indate DESC;
 DROP TABLE orders;
 commit;
 
--- ÁÖ¹®»ó¼¼ Å×ÀÌºí
+-- ì£¼ë¬¸ìƒì„¸ í…Œì´ë¸”
 CREATE TABLE order_detail(
-  odseq NUMBER(10) PRIMARY KEY, /* ÁÖ¹®»ó¼¼¹øÈ£ */
-  oseq NUMBER(10), /* ÁÖ¹®¹øÈ£ */
-  pseq NUMBER(5), /* »óÇ°¹øÈ£ */
-  quantity NUMBER(5) DEFAULT 1, /* ÁÖ¹®¼ö·® */
-  result CHAR(1) DEFAULT '1', /* Ã³¸®¿©ºÎ 1:¹ÌÃ³¸®, 2:Ã³¸® */
+  odseq NUMBER(10) PRIMARY KEY, /* ì£¼ë¬¸ìƒì„¸ë²ˆí˜¸ */
+  oseq NUMBER(10), /* ì£¼ë¬¸ë²ˆí˜¸ */
+  pseq NUMBER(5), /* ìƒí’ˆë²ˆí˜¸ */
+  quantity NUMBER(5) DEFAULT 1, /* ì£¼ë¬¸ìˆ˜ëŸ‰ */
+  result CHAR(1) DEFAULT '1', /* ì²˜ë¦¬ì—¬ë¶€ 1:ë¯¸ì²˜ë¦¬, 2:ì²˜ë¦¬ */
   FOREIGN KEY(oseq) REFERENCES orders(oseq),
   FOREIGN KEY(pseq) REFERENCES product(pseq)
 );
@@ -115,15 +118,15 @@ SELECT * FROM order_detail ORDER BY odseq DESC;
 DROP TABLE order_detail;
 commit;
 
--- QnA Å×ÀÌºí
+-- QnA í…Œì´ë¸”
 CREATE TABLE qna(
-  qseq NUMBER(5) PRIMARY KEY, /* ±Û¹øÈ£ */
-  subject VARCHAR2(30), /* Á¦¸ñ */
-  content VARCHAR2(1000), /* ³»¿ë */
-  reply VARCHAR2(1000), /* ´äº¯ */
-  id VARCHAR2(20), /* ¾ÆÀÌµğ */
-  rep CHAR(1) DEFAULT '1', /* ´äº¯À¯¹« */
-  indate DATE DEFAULT SYSDATE, /* ÀÛ¼ºÀÏ */
+  qseq NUMBER(5) PRIMARY KEY, /* ê¸€ë²ˆí˜¸ */
+  subject VARCHAR2(30), /* ì œëª© */
+  content VARCHAR2(1000), /* ë‚´ìš© */
+  reply VARCHAR2(1000), /* ë‹µë³€ */
+  id VARCHAR2(20), /* ì•„ì´ë”” */
+  rep CHAR(1) DEFAULT '1', /* ë‹µë³€ìœ ë¬´ */
+  indate DATE DEFAULT SYSDATE, /* ì‘ì„±ì¼ */
   FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -135,52 +138,52 @@ SELECT * FROM qna ORDER BY qseq DESC;
 DROP TABLE qna;
 commit;
 
----- »ùÇÃ µ¥ÀÌÅÍ ----
--- °ü¸®ÀÚ
-INSERT INTO worker VALUES('admin', 'admin', 'È«°ü¸®', '010-777-7777');
-INSERT INTO worker VALUES('soonshin', '1234', 'ÀÌ¼ø½Å', '010-999-9696');
+---- ìƒ˜í”Œ ë°ì´í„° ----
+-- ê´€ë¦¬ì
+INSERT INTO worker VALUES('admin', 'admin', 'í™ê´€ë¦¬', '010-777-7777');
+INSERT INTO worker VALUES('soonshin', '1234', 'ì´ìˆœì‹ ', '010-999-9696');
 commit;
 
--- »ç¿ëÀÚ
+-- ì‚¬ìš©ì
 INSERT INTO member(id, pwd, name, zip_num, address, phone) 
-     VALUES ('one', '1111', '±è³ª¸®', '133-110', '¼­¿ï½Ã¼ºµ¿±¸¼º¼öµ¿1°¡ 1¹øÁö21È£', '017-777-7777');
+     VALUES ('one', '1111', 'ê¹€ë‚˜ë¦¬', '133-110', 'ì„œìš¸ì‹œì„±ë™êµ¬ì„±ìˆ˜ë™1ê°€ 1ë²ˆì§€21í˜¸', '017-777-7777');
 INSERT INTO member(id, pwd, name, zip_num, address, phone)
-     VALUES ('two', '2222', 'ÀÌ¹éÇÕ', '130-120', '¼­¿ï½Ã¼ÛÆÄ±¸Àá½Ç2µ¿ ¸®¼¾Ã÷ ¾ÆÆÄÆ® 201µ¿ 505È£', '011-123-4567');
+     VALUES ('two', '2222', 'ì´ë°±í•©', '130-120', 'ì„œìš¸ì‹œì†¡íŒŒêµ¬ì ì‹¤2ë™ ë¦¬ì„¼ì¸  ì•„íŒŒíŠ¸ 201ë™ 505í˜¸', '011-123-4567');
 commit;
 
--- »óÇ°
+-- ìƒí’ˆ
 INSERT INTO product(pseq, name, kind, price1, price2, price3, content, image)
-     VALUES (product_seq.NEXTVAL, 'Å©·ÎÄ¿´ÙÀÏºÎÃ÷', '2', '40000', '50000', '10000', '¿À¸®Áö³¯ Å©·ÎÄ¿´ÙÀÏºÎÃ÷ ÀÔ´Ï´Ù.', 'w2.jpg');
+     VALUES (product_seq.NEXTVAL, 'í¬ë¡œì»¤ë‹¤ì¼ë¶€ì¸ ', '2', '40000', '50000', '10000', 'ì˜¤ë¦¬ì§€ë‚  í¬ë¡œì»¤ë‹¤ì¼ë¶€ì¸  ì…ë‹ˆë‹¤.', 'w2.jpg');
 INSERT INTO product(pseq, name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL, '·ÕºÎÃ÷', '2', '40000', '50000', '10000','µû¶æÇÑ ·ÕºÎÃ÷ ÀÔ´Ï´Ù.', 'w-28.jpg', 'n');
+     VALUES (product_seq.NEXTVAL, 'ë¡±ë¶€ì¸ ', '2', '40000', '50000', '10000','ë”°ëœ»í•œ ë¡±ë¶€ì¸  ì…ë‹ˆë‹¤.', 'w-28.jpg', 'n');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL, 'Èú', '1', '10000', '12000', '2000', '¿©¼º¿ëÀü¿ë Èú', 'w-26.jpg', 'n');
+     VALUES (product_seq.NEXTVAL, 'í', '1', '10000', '12000', '2000', 'ì—¬ì„±ìš©ì „ìš© í', 'w-26.jpg', 'n');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL, '½½¸®ÆÛ', '4', '5000', '5500', '500', 'Æí¾ÈÇÑ ½½¸®ÆÛÀÔ´Ï´Ù.', 'w-25.jpg', 'y');
+     VALUES (product_seq.NEXTVAL, 'ìŠ¬ë¦¬í¼', '4', '5000', '5500', '500', 'í¸ì•ˆí•œ ìŠ¬ë¦¬í¼ì…ë‹ˆë‹¤.', 'w-25.jpg', 'y');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL, 'È¸»öÈú', '1', '10000', '12000', '2000', '¿©¼º¿ëÀü¿ë Èú', 'w9.jpg', 'n');
+     VALUES (product_seq.NEXTVAL, 'íšŒìƒ‰í', '1', '10000', '12000', '2000', 'ì—¬ì„±ìš©ì „ìš© í', 'w9.jpg', 'n');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image)
-     VALUES (product_seq.NEXTVAL, '¿©¼ººÎÃ÷', '2', '12000', '18000', '6000', '¿©¼º¿ë ºÎÃ÷', 'w4.jpg');
+     VALUES (product_seq.NEXTVAL, 'ì—¬ì„±ë¶€ì¸ ', '2', '12000', '18000', '6000', 'ì—¬ì„±ìš© ë¶€ì¸ ', 'w4.jpg');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL,  'ÇÎÅ©»÷´Ş', '3', '5000', '5500', '500', '»ç°èÀı¿ë »÷´ŞÀÔ´Ï´Ù.', 'w-10.jpg', 'y');
+     VALUES (product_seq.NEXTVAL,  'í•‘í¬ìƒŒë‹¬', '3', '5000', '5500', '500', 'ì‚¬ê³„ì ˆìš© ìƒŒë‹¬ì…ë‹ˆë‹¤.', 'w-10.jpg', 'y');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL, '½½¸®ÆÛ', '3', '5000', '5500', '500', 'Æí¾ÈÇÑ ½½¸®ÆÛÀÔ´Ï´Ù.', 'w11.jpg', 'y');
+     VALUES (product_seq.NEXTVAL, 'ìŠ¬ë¦¬í¼', '3', '5000', '5500', '500', 'í¸ì•ˆí•œ ìŠ¬ë¦¬í¼ì…ë‹ˆë‹¤.', 'w11.jpg', 'y');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image)
-     VALUES (product_seq.NEXTVAL,  '½º´ÏÄ¿Áî', '4', '15000', '20000', '5000', 'È°µ¿¼ºÀÌ ÁÁÀº ½º´ÏÄ¿ÁîÀÔ´Ï´Ù.', 'w1.jpg');
+     VALUES (product_seq.NEXTVAL,  'ìŠ¤ë‹ˆì»¤ì¦ˆ', '4', '15000', '20000', '5000', 'í™œë™ì„±ì´ ì¢‹ì€ ìŠ¤ë‹ˆì»¤ì¦ˆì…ë‹ˆë‹¤.', 'w1.jpg');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL,  '»÷´Ş', '3', '5000', '5500', '500', '»ç°èÀı¿ë »÷´ŞÀÔ´Ï´Ù.', 'w-09.jpg','n');
+     VALUES (product_seq.NEXTVAL,  'ìƒŒë‹¬', '3', '5000', '5500', '500', 'ì‚¬ê³„ì ˆìš© ìƒŒë‹¬ì…ë‹ˆë‹¤.', 'w-09.jpg','n');
 INSERT INTO product(pseq,  name, kind, price1, price2, price3, content, image, bestyn)
-     VALUES (product_seq.NEXTVAL,  '½º´ÏÄ¿Áî', '5', '15000', '20000', '5000', 'È°µ¿¼ºÀÌ ÁÁÀº ½º´ÏÄ¿ÁîÀÔ´Ï´Ù.', 'w-05.jpg','n');
+     VALUES (product_seq.NEXTVAL,  'ìŠ¤ë‹ˆì»¤ì¦ˆ', '5', '15000', '20000', '5000', 'í™œë™ì„±ì´ ì¢‹ì€ ìŠ¤ë‹ˆì»¤ì¦ˆì…ë‹ˆë‹¤.', 'w-05.jpg','n');
 commit;
 DELETE product;
 
--- Àå¹Ù±¸´Ï
+-- ì¥ë°”êµ¬ë‹ˆ
 INSERT INTO cart(cseq,id, pseq, quantity)
      VALUES (cart_seq.NEXTVAL, 'one', 1, 1);
 commit;
 DELETE product WHERE pseq=8;
 
--- ÁÖ¹®
+-- ì£¼ë¬¸
 INSERT INTO orders(oseq, id)
      VALUES (orders_seq.NEXTVAL, 'one');
 INSERT INTO orders(oseq, id)
@@ -189,7 +192,7 @@ INSERT INTO orders(oseq, id)
      VALUES (orders_seq.NEXTVAL, 'two');     
 commit;
 
--- ÁÖ¹® »ó¼¼
+-- ì£¼ë¬¸ ìƒì„¸
 INSERT INTO order_detail(odseq, oseq, pseq, quantity)
      VALUES (order_detail_seq.NEXTVAL, 1, 1, 1);
 INSERT INTO order_detail(odseq, oseq, pseq, quantity)
@@ -209,13 +212,13 @@ DELETE order_detail;
 
 -- QnA
 INSERT INTO qna (qseq, subject, content, id)
-     VALUES (qna_seq.nextval, 'Å×½ºÆ®', 'Áú¹®³»¿ë1', 'one');
-UPDATE qna SET reply='´äº¯³»¿ë', rep='2';
+     VALUES (qna_seq.nextval, 'í…ŒìŠ¤íŠ¸', 'ì§ˆë¬¸ë‚´ìš©1', 'one');
+UPDATE qna SET reply='ë‹µë³€ë‚´ìš©', rep='2';
 INSERT INTO qna (qseq, subject, content, id)
-     VALUES (qna_seq.nextval, 'Å×½ºÆ®2', 'Áú¹®³»¿ë2', 'one');     
+     VALUES (qna_seq.nextval, 'í…ŒìŠ¤íŠ¸2', 'ì§ˆë¬¸ë‚´ìš©2', 'one');     
 commit;
 
--- »óÇ°Æò
+-- ìƒí’ˆí‰
 CREATE TABLE product_comment(
   comment_seq NUMBER PRIMARY KEY,
   pseq NUMBER(5,0) NOT NULL,
@@ -233,7 +236,7 @@ INCREMENT BY 1;
 SELECT * FROM product_comment;
 DROP TABLE product_comment;
 
--- ÁÖ¼Ò Å×ÀÌºí »ı¼º ¹× »ğÀÔ
+-- ì£¼ì†Œ í…Œì´ë¸” ìƒì„± ë° ì‚½ì…
 @zip
 SELECT * 
   FROM (SELECT *
@@ -241,7 +244,7 @@ SELECT *
       ORDER BY zipcode DESC)
  WHERE ROWNUM = 1;
 
--- ½Å»óÇ° Á¶È¸ÇÏ´Â ºä »ı¼º
+-- ì‹ ìƒí’ˆ ì¡°íšŒí•˜ëŠ” ë·° ìƒì„±
 CREATE OR REPLACE VIEW new_pro_view 
                     AS 
                 SELECT pseq, name, price2, image
@@ -252,7 +255,7 @@ CREATE OR REPLACE VIEW new_pro_view
 
 SELECT * FROM new_pro_view;
 
--- º£½ºÆ®»óÇ° Á¶È¸ÇÏ´Â ºä »ı¼º
+-- ë² ìŠ¤íŠ¸ìƒí’ˆ ì¡°íšŒí•˜ëŠ” ë·° ìƒì„±
 CREATE OR REPLACE VIEW best_pro_view 
                     AS 
                 SELECT pseq, name, price2, image
@@ -265,7 +268,7 @@ SELECT * FROM best_pro_view;
 
 DROP VIEW new_pro_view;
 
--- Àå¹Ù±¸´Ï¸¦ Á¶È¸ÇÏ´Â ºä »ı¼º
+-- ì¥ë°”êµ¬ë‹ˆë¥¼ ì¡°íšŒí•˜ëŠ” ë·° ìƒì„±
 CREATE OR REPLACE VIEW cart_view 
                     AS 
                 SELECT c.cseq, c.id, m.name mname, c.pseq, p.name pname, p.price2, c.quantity, c.indate, c.result
@@ -274,11 +277,11 @@ CREATE OR REPLACE VIEW cart_view
                    AND c.pseq = p.pseq
                    AND c.result = '1';
 
--- ÁÖ¹®¹øÈ£ »ı¼º
+-- ì£¼ë¬¸ë²ˆí˜¸ ìƒì„±
 SELECT NVL2(MAX(oseq), MAX(oseq)+1, 1)
   FROM orders;
   
--- ÁÖ¹®Á¤º¸ ºä »ı¼º
+-- ì£¼ë¬¸ì •ë³´ ë·° ìƒì„±
 CREATE OR REPLACE VIEW order_view 
                     AS 
                 SELECT od.odseq, od.oseq, m.id, m.name mname, od.pseq, p.name pname, od.quantity, p.price2, od.result, o.indate, m.address, m.phone, m.zip_num
@@ -287,7 +290,7 @@ CREATE OR REPLACE VIEW order_view
                    AND o.id = m.id 
                    AND od.pseq = p.pseq;
                    
---»óÇ° ¸ñ·Ï ÆäÀÌÂ¡ Á¶È¸              
+--ìƒí’ˆ ëª©ë¡ í˜ì´ì§• ì¡°íšŒ              
 <![CDATA[
 SELECT *
   FROM (SELECT row_number() OVER (ORDER BY name) rn, pseq, regDate, name, price1, price2, useyn, bestyn
@@ -297,7 +300,7 @@ SELECT *
    AND rn > 0 * 10;
 ]]>
 
--- »óÇ°º° ´ñ±Û ¸ñ·Ï ÆäÀÌÂ¡ Á¶È¸
+-- ìƒí’ˆë³„ ëŒ“ê¸€ ëª©ë¡ í˜ì´ì§• ì¡°íšŒ
 SELECT *
   FROM (SELECT row_number() OVER (ORDER BY regDate DESC) rn, comment_seq, pseq, content, writer, regDate, modDate
           FROM product_comment
@@ -305,30 +308,30 @@ SELECT *
  WHERE rn <= 1 * 10
    AND rn > 0 * 10;
    
--- [°ü¸®ÀÚ] »ç¿ëÀÚº° ÀüÃ¼ ÁÖ¹® ÆäÀÌÂ¡ Á¶È¸
+-- [ê´€ë¦¬ì] ì‚¬ìš©ìë³„ ì „ì²´ ì£¼ë¬¸ í˜ì´ì§• ì¡°íšŒ
 SELECT *
   FROM (SELECT row_number() OVER (ORDER BY result, oseq DESC) rn, odseq, oseq, id, mname, pseq, pname, quantity, price2, result, indate, address, phone, zip_num
 		  FROM order_view
-		 WHERE mname LIKE '%'||'´Ù¼­ÀÌ'||'%')
+		 WHERE mname LIKE '%'||'ë‹¤ì„œì´'||'%')
  WHERE rn <= 1 * 10
    AND rn > 0 * 10;
    
--- [°ü¸®ÀÚ] ÀüÃ¼ È¸¿ø Á¶È¸
+-- [ê´€ë¦¬ì] ì „ì²´ íšŒì› ì¡°íšŒ
 SELECT *
   FROM (SELECT row_number() OVER (ORDER BY regDate DESC) rn, id, pwd, name, email, zip_num, address, phone, useyn, regDate
 		  FROM member
-		 WHERE name LIKE '%'||'ÀÌ'||'%')
+		 WHERE name LIKE '%'||'ì´'||'%')
  WHERE rn <= 1 * 10
    AND rn > 0 * 10;   
 
--- [°ü¸®ÀÚ] QnA ¸ñ·Ï Á¶È¸
+-- [ê´€ë¦¬ì] QnA ëª©ë¡ ì¡°íšŒ
 SELECT *
   FROM (SELECT row_number() OVER (ORDER BY indate DESC) rn, qseq, subject, content, reply, id, rep, indate
 		  FROM qna)
  WHERE rn <= 1 * 10
    AND rn > 0 * 10;    
    
--- [°ü¸®ÀÚ] ÁÖ¹®¿Ï·á Á¶È¸
+-- [ê´€ë¦¬ì] ì£¼ë¬¸ì™„ë£Œ ì¡°íšŒ
 SELECT pname, sum(quantity) 
   FROM order_view
  WHERE result='2'
